@@ -1,0 +1,44 @@
+# Build outputs
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+
+# Build directories
+build/
+cmake-build-*/
+Debug/
+Release/
+out/
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
+
+# Full autodiff distribution (only headers in autodiff/ are needed)
+autodiff-1.1.2/
+
+# Data output files (large CSVs — regenerate from source)
+weq_lut.csv
+taums_lut.csv
+
+# Reference materials (large PDFs)
+ref/*.pdf
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS files
+Thumbs.db
+.DS_Store
+Desktop.ini
