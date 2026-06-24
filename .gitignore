@@ -19,7 +19,7 @@ out/
 *.swo
 *~
 
-# Claude Code
+# Claude Code (local settings only — memory is in .claude-memory/)
 .claude/
 
 # Full autodiff distribution (only headers in autodiff/ are needed)
