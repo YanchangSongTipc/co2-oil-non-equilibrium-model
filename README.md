@@ -146,7 +146,7 @@ Default parameters (laminar flat plate): $C=0.664$, $a=0.5$, $b=0.333$.
 
 ## Results
 
-![Report](fig_report.png)
+![Report](figures/fig_report.png)
 
 - **7,381 / 7,381 points converged** (100%) for Step 1
 - **4,718 / 7,381 points computed** for Step 2 (2,663 skipped = full-miscibility regime)

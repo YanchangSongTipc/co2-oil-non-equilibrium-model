@@ -60,7 +60,7 @@ cbar.set_label(r'$\tau_{ms}$  (ms)')
 ax.set_xlabel('Temperature  $T$  (K)')
 ax.set_ylabel('Pressure  $P$  (MPa)')
 ax.set_title(r'CO$_2$ + SW68:  Mass Transfer Relaxation Time  $\tau_{ms}(T,P)$', fontsize=14)
-fig.savefig('fig_taums_contour.png', dpi=200)
+fig.savefig('figures/fig_taums_contour.png', dpi=200)
 plt.close()
 print("[OK] fig_taums_contour.png")
 
@@ -73,7 +73,7 @@ cbar.set_label(r'$D_{12}$  ($\times 10^{-9}$ m$^2$/s)')
 ax.set_xlabel('Temperature  $T$  (K)')
 ax.set_ylabel('Pressure  $P$  (MPa)')
 ax.set_title(r'CO$_2$ + SW68:  Diffusion Coefficient  $D_{12}(T,P)$', fontsize=14)
-fig.savefig('fig_d12_contour.png', dpi=200)
+fig.savefig('figures/fig_d12_contour.png', dpi=200)
 plt.close()
 print("[OK] fig_d12_contour.png")
 
@@ -86,7 +86,7 @@ cbar.set_label(r'$\mu_m$  (mPa$\cdot$s)')
 ax.set_xlabel('Temperature  $T$  (K)')
 ax.set_ylabel('Pressure  $P$  (MPa)')
 ax.set_title(r'CO$_2$ + SW68:  Mixture Viscosity  $\mu_m(T,P)$', fontsize=14)
-fig.savefig('fig_viscosity_contour.png', dpi=200)
+fig.savefig('figures/fig_viscosity_contour.png', dpi=200)
 plt.close()
 print("[OK] fig_viscosity_contour.png")
 
@@ -140,7 +140,7 @@ fig.suptitle('CO$_2$ + SW68:  Mesoscopic Transport Properties\n'
              r'$D_0=5\times10^{-8}$ m$^2$/s,  $\gamma=0.6$,  $L=0.01$ m,  $u=1$ m/s  [PLACEHOLDER]',
              fontsize=14, fontweight='bold', y=1.02)
 fig.tight_layout()
-fig.savefig('fig_transport_panels.png', dpi=200)
+fig.savefig('figures/fig_transport_panels.png', dpi=200)
 plt.close()
 print("[OK] fig_transport_panels.png")
 
@@ -186,7 +186,7 @@ axes[1].grid(True, alpha=0.3, which='both')
 fig.suptitle(r'CO$_2$ + SW68:  $\tau_{ms}$ Parameter Sensitivity',
              fontsize=14, fontweight='bold')
 fig.tight_layout()
-fig.savefig('fig_sensitivity.png', dpi=200)
+fig.savefig('figures/fig_sensitivity.png', dpi=200)
 plt.close()
 print("[OK] fig_sensitivity.png")
 
@@ -248,7 +248,7 @@ ax5.grid(True, alpha=0.3, which='both')
 
 fig.suptitle(r'CO$_2$ + SW68:  Mesoscopic Transport — $\tau_{ms}$ Field  [PLACEHOLDER PARAMETERS]',
              fontsize=15, fontweight='bold', y=1.01)
-fig.savefig('fig_taums_report.png', dpi=200)
+fig.savefig('figures/fig_taums_report.png', dpi=200)
 plt.close()
 print("[OK] fig_taums_report.png")
 
@@ -278,11 +278,12 @@ print(f"  D0={5.0e-8:.1e} m2/s, gamma=0.6, V*_CO2={5.89e-4:.2e} m3/kg")
 print(f"  To reach ~1 ms: increase D0 by ~1000x or decrease L by ~30x")
 print("=" * 90)
 
-print("\nAll figures saved:")
+print("\nAll figures saved (in figures/):")
 for f in ['fig_taums_contour.png', 'fig_d12_contour.png', 'fig_viscosity_contour.png',
            'fig_transport_panels.png', 'fig_sensitivity.png', 'fig_taums_report.png']:
+    path = os.path.join('figures', f)
     try:
-        print(f"  {f:35s}  ({os.path.getsize(f)/1024:.0f} KB)")
+        print(f"  {path:40s}  ({os.path.getsize(path)/1024:.0f} KB)")
     except:
-        print(f"  {f:35s}  (MISSING)")
+        print(f"  {path:40s}  (MISSING)")
 print("=" * 60)

@@ -81,7 +81,7 @@ fig.suptitle('CO$_2$ (1) + SW68 (2):  Isothermal Solubility Curves\n'
              r'$k_{ij}(T) = A \cdot T + B$,  $A=1.078\times10^{-4}$,  $B=-0.0281$',
              fontsize=14, fontweight='bold', y=1.02)
 fig.tight_layout()
-fig.savefig('fig_isotherms.png', dpi=200)
+fig.savefig('figures/fig_isotherms.png', dpi=200)
 plt.close()
 print("[OK] fig_isotherms.png")
 
@@ -96,7 +96,7 @@ ax.clabel(ct, fmt='%.1f', fontsize=8)
 ax.set_xlabel('Temperature  $T$  (K)')
 ax.set_ylabel('Pressure  $P$  (MPa)')
 ax.set_title(r'CO$_2$ + SW68:  $w_{1,eq}(T,P)$  Filled Contour', fontsize=14)
-fig.savefig('fig_contour.png', dpi=200)
+fig.savefig('figures/fig_contour.png', dpi=200)
 plt.close()
 print("[OK] fig_contour.png")
 
@@ -111,7 +111,7 @@ ax.set_title(r'CO$_2$ + SW68  $w_{1,eq}(T,P)$  3D Surface', fontsize=14, pad=15)
 cbar = fig.colorbar(surf, ax=ax, shrink=0.55, pad=0.08)
 cbar.set_label(r'$w_{1,eq}$')
 ax.view_init(elev=22, azim=-55)
-fig.savefig('fig_3d_surface.png', dpi=200)
+fig.savefig('figures/fig_3d_surface.png', dpi=200)
 plt.close()
 print("[OK] fig_3d_surface.png")
 
@@ -142,7 +142,7 @@ ax.grid(True, alpha=0.3)
 ax.set_xlim(left=0)
 ax.set_ylim(bottom=0)
 fig.tight_layout()
-fig.savefig('fig_phase_diagram.png', dpi=200)
+fig.savefig('figures/fig_phase_diagram.png', dpi=200)
 plt.close()
 print("[OK] fig_phase_diagram.png")
 
@@ -157,7 +157,7 @@ cbar.ax.set_yticklabels([r'Two-Phase Equilibrium  ($x_1 < 0.999$)',
 ax.set_xlabel('Temperature  $T$  (K)')
 ax.set_ylabel('Pressure  $P$  (MPa)')
 ax.set_title(r'CO$_2$ + SW68:  Phase Regime Map  ($T$–$P$)', fontsize=14)
-fig.savefig('fig_regime.png', dpi=200)
+fig.savefig('figures/fig_regime.png', dpi=200)
 plt.close()
 print("[OK] fig_regime.png")
 
@@ -169,7 +169,7 @@ cbar.set_label(r'Liquid Density  $\rho_L$  ($\times 10^3$ mol/m$^3$)')
 ax.set_xlabel('Temperature  $T$  (K)')
 ax.set_ylabel('Pressure  $P$  (MPa)')
 ax.set_title(r'CO$_2$ + SW68:  Liquid Mixture Density  $\rho_L(T,P)$', fontsize=14)
-fig.savefig('fig_density.png', dpi=200)
+fig.savefig('figures/fig_density.png', dpi=200)
 plt.close()
 print("[OK] fig_density.png")
 
@@ -241,7 +241,7 @@ ax5.set_title(r'(e)  Density $\rho_L(T,P)$')
 fig.suptitle(r'CO$_2$ (1) + SW68 Lubricant Oil (2) — SAFT-VR-Mie Phase Equilibrium LUT' '\n'
              r'$k_{ij}(T) = A\cdot T + B$,  $A = 1.078\times 10^{-4}$,  $B = -0.0281$',
              fontsize=15, fontweight='bold', y=1.01)
-fig.savefig('fig_report.png', dpi=200)
+fig.savefig('figures/fig_report.png', dpi=200)
 plt.close()
 print("[OK] fig_report.png (combined 5-panel figure)")
 
@@ -275,9 +275,10 @@ print("All figures saved:")
 files = ['fig_isotherms.png', 'fig_phase_diagram.png', 'fig_contour.png',
          'fig_3d_surface.png', 'fig_regime.png', 'fig_density.png', 'fig_report.png']
 for f in files:
+    path = os.path.join('figures', f)
     try:
-        size_kb = os.path.getsize(f) / 1024
-        print(f"  {f:30s}  ({size_kb:.0f} KB)")
+        size_kb = os.path.getsize(path) / 1024
+        print(f"  {path:40s}  ({size_kb:.0f} KB)")
     except:
-        print(f"  {f:30s}  (MISSING)")
+        print(f"  {path:40s}  (MISSING)")
 print("=" * 60)
