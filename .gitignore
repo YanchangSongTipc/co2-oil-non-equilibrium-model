@@ -19,10 +19,10 @@ out/
 *.swo
 *~
 
-# Claude Code (local settings only — memory is in .claude-memory/)
+# Claude Code local settings
 .claude/
 
-# Full autodiff distribution (only headers in autodiff/ are needed)
+# Full autodiff distribution (only headers in lib/autodiff/ are needed)
 autodiff-1.1.2/
 
 # Data output files (large CSVs — regenerate from source)
@@ -30,7 +30,8 @@ weq_lut.csv
 taums_lut.csv
 
 # Reference materials (large PDFs)
-ref/*.pdf
+ref/
+docs/*.pdf
 
 # Python cache
 __pycache__/

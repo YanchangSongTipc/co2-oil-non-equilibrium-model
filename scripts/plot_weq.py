@@ -15,8 +15,8 @@ from matplotlib import cm
 import os
 
 # ── Load data ────────────────────────────────────────────────────────────────
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
+# Run from project root regardless of where this script is located
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 df = pd.read_csv('weq_lut.csv')
 print(f"Loaded {len(df)} rows, {df['converged'].sum()} converged")

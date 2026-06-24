@@ -12,8 +12,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
+# Run from project root regardless of where this script is located
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 # Load data
 df = pd.read_csv('taums_lut.csv')

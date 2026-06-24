@@ -26,13 +26,13 @@ pip3 install --quiet numpy pandas matplotlib scipy
 # ── 3. Compile C++ programs ─────────────────────────────────────────────────
 echo "[3/4] Compiling C++ programs..."
 
-g++ -std=c++17 -O2 -I . calc_weq_lut.cpp saft_mie.cpp -o calc_weq_lut
+g++ -std=c++17 -O2 -I lib src/calc_weq_lut.cpp src/saft_mie.cpp -o calc_weq_lut
 echo "  -> calc_weq_lut  compiled"
 
-g++ -std=c++17 -O2 -I . calc_taums.cpp saft_mie.cpp -o calc_taums
+g++ -std=c++17 -O2 -I lib src/calc_taums.cpp src/saft_mie.cpp -o calc_taums
 echo "  -> calc_taums   compiled"
 
-g++ -std=c++17 -O2 -I . test.cpp saft_mie.cpp -o test_saft
+g++ -std=c++17 -O2 -I lib src/test.cpp src/saft_mie.cpp -o test_saft
 echo "  -> test_saft    compiled"
 
 # ── 4. Run the pipeline ─────────────────────────────────────────────────────
@@ -48,19 +48,19 @@ echo "  Step 2: Mesoscopic transport tau_ms LUT..."
 
 echo ""
 echo "  Generating figures..."
-python3 plot_weq.py
-python3 plot_taums.py
+python3 scripts/plot_weq.py
+python3 scripts/plot_taums.py
 
 echo ""
 echo "============================================================"
 echo "  Setup complete!"
 echo ""
 echo "  Output files:"
-echo "    weq_lut.csv            — solubility LUT"
-echo "    taums_lut.csv          — transport LUT"
-echo "    fig_*.png              — visualisation figures"
-echo "    FIGURES_README.md      — figure-by-figure analysis"
-echo "    TAUMS_ANALYSIS.md      — tau_ms result analysis"
+echo "    weq_lut.csv              — solubility LUT"
+echo "    taums_lut.csv            — transport LUT"
+echo "    fig_*.png                — visualisation figures"
+echo "    docs/FIGURES_README.md   — figure-by-figure analysis"
+echo "    docs/TAUMS_ANALYSIS.md   — tau_ms result analysis"
 echo ""
 echo "  To re-run after changing parameters:"
 echo "    ./calc_weq_lut && ./calc_taums"

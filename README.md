@@ -26,9 +26,9 @@ via bilinear interpolation, avoiding repeated EOS iterations at each grid node.
 ### Build & Run
 
 ```bash
-# Direct compilation
-g++ -std=c++17 -O2 -I . calc_weq_lut.cpp saft_mie.cpp -o calc_weq_lut
-g++ -std=c++17 -O2 -I . calc_taums.cpp  saft_mie.cpp -o calc_taums
+# Direct compilation (autodiff headers in lib/)
+g++ -std=c++17 -O2 -I lib src/calc_weq_lut.cpp src/saft_mie.cpp -o calc_weq_lut
+g++ -std=c++17 -O2 -I lib src/calc_taums.cpp  src/saft_mie.cpp -o calc_taums
 
 # Step 1: Generate equilibrium solubility LUT
 ./calc_weq_lut          # produces weq_lut.csv
@@ -37,8 +37,8 @@ g++ -std=c++17 -O2 -I . calc_taums.cpp  saft_mie.cpp -o calc_taums
 ./calc_taums            # produces taums_lut.csv
 
 # Visualisation
-python plot_weq.py      # solubility figures
-python plot_taums.py    # transport figures
+python scripts/plot_weq.py      # solubility figures
+python scripts/plot_taums.py    # transport figures
 ```
 
 Or with CMake:
@@ -118,25 +118,30 @@ $$Sh = C \cdot Re^a \cdot Sc^b$$
 Default parameters (laminar flat plate): $C=0.664$, $a=0.5$, $b=0.333$.
 
 > **Note**: All free-volume and flow parameters are **placeholders**. Replace with
-> experimentally-fitted values in `calc_taums.cpp` lines 42–80.
+> experimentally-fitted values in `src/calc_taums.cpp` lines 42–80.
 
 ## Project Structure
 
 ```
 .
-├── saft_mie.h / saft_mie.cpp    SAFT-VR-Mie EOS core (from Reaktoro)
-├── autodiff/                     Forward-mode automatic differentiation
-├── calc_weq_lut.cpp              Step 1: solubility LUT generator
-├── calc_taums.cpp                Step 2: transport τ_ms LUT generator
-├── test.cpp                      Pure CO₂ verification test
-├── CMakeLists.txt                CMake build configuration
-├── plot_weq.py                   Solubility visualisation
-├── plot_taums.py                 Transport visualisation + sensitivity
-├── ref/
-│   └── what_needed.md            Task specification / calculation framework
-├── FIGURES_README.md             Figure-by-figure analysis guide
-├── TAUMS_ANALYSIS.md             τ_ms result interpretation
-└── README.md                     This file
+├── src/
+│   ├── saft_mie.h / saft_mie.cpp    SAFT-VR-Mie EOS core (from Reaktoro)
+│   ├── calc_weq_lut.cpp              Step 1: solubility LUT generator
+│   ├── calc_taums.cpp                Step 2: transport tau_ms LUT generator
+│   └── test.cpp                      Pure CO2 verification test
+├── scripts/
+│   ├── plot_weq.py                   Solubility visualisation
+│   └── plot_taums.py                 Transport visualisation + sensitivity
+├── docs/
+│   ├── FIGURES_README.md             Figure-by-figure analysis guide
+│   ├── TAUMS_ANALYSIS.md             tau_ms result interpretation
+│   └── what_needed.md                Task specification / calculation framework
+├── lib/
+│   └── autodiff/                     Forward-mode AD (header-only)
+├── .claude-memory/                   Claude memory for cross-machine migration
+├── CMakeLists.txt                    CMake build configuration
+├── setup_ubuntu.sh                   One-click Ubuntu 22.04 setup
+└── README.md                         This file
 ```
 
 ## Results

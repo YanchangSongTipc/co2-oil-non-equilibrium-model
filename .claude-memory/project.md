@@ -14,15 +14,15 @@ using SAFT-VR-Mie equation of state. The output feeds a macroscopic 1-D flow/hea
 
 | File | Purpose |
 |------|---------|
-| `saft_mie.h` / `saft_mie.cpp` | SAFT-VR-Mie EOS core (from Reaktoro project), with autodiff |
-| `autodiff/` | Header-only forward-mode automatic differentiation library |
-| `calc_weq_lut.cpp` | **Step 1**: equilibrium solubility LUT generator |
-| `calc_taums.cpp` | **Step 2**: mesoscopic transport tau_ms LUT generator |
-| `test.cpp` | Pure CO2 verification test |
+| `src/saft_mie.h` / `src/saft_mie.cpp` | SAFT-VR-Mie EOS core (from Reaktoro project), with autodiff |
+| `lib/autodiff/` | Header-only forward-mode automatic differentiation library |
+| `src/calc_weq_lut.cpp` | **Step 1**: equilibrium solubility LUT generator |
+| `src/calc_taums.cpp` | **Step 2**: mesoscopic transport tau_ms LUT generator |
+| `src/test.cpp` | Pure CO2 verification test |
 | `CMakeLists.txt` | Build system |
-| `plot_weq.py` | Solubility visualisation |
-| `plot_taums.py` | Transport visualisation + sensitivity analysis |
-| `ref/what_needed.md` | Original task specification from the research report |
+| `scripts/plot_weq.py` | Solubility visualisation |
+| `scripts/plot_taums.py` | Transport visualisation + sensitivity analysis |
+| `docs/what_needed.md` | Original task specification from the research report |
 
 ## Component SAFT Parameters
 
@@ -66,15 +66,15 @@ k_ij(343.15 K) = 0.0089
 sudo apt install build-essential g++ python3-pip
 pip install numpy pandas matplotlib scipy
 
-# Compile
-g++ -std=c++17 -O2 -I . calc_weq_lut.cpp saft_mie.cpp -o calc_weq_lut
-g++ -std=c++17 -O2 -I . calc_taums.cpp  saft_mie.cpp -o calc_taums
+# Compile (autodiff headers in lib/, sources in src/)
+g++ -std=c++17 -O2 -I lib src/calc_weq_lut.cpp src/saft_mie.cpp -o calc_weq_lut
+g++ -std=c++17 -O2 -I lib src/calc_taums.cpp  src/saft_mie.cpp -o calc_taums
 
 # Run (order matters)
 ./calc_weq_lut          # produces weq_lut.csv
 ./calc_taums            # reads weq_lut.csv, produces taums_lut.csv
-python plot_weq.py      # solubility figures
-python plot_taums.py    # transport figures
+python scripts/plot_weq.py      # solubility figures
+python scripts/plot_taums.py    # transport figures
 ```
 
 ## Key Design Decisions

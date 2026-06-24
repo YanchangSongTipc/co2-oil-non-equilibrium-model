@@ -10,7 +10,7 @@ type: feedback
 **Why**: The phase equilibrium function f(x1) = phi_V - x1*phi_L(x1) has two roots
 near P_sat (physical x1<1 and trivial x1=1). Pure secant oscillates between them.
 **How to apply**: Always use step-size damping (max_step = 0.3*(x_sec0 + x_sec1)) and
-bracket detection. The `calc_weq_lut.cpp` solver is the reference implementation.
+bracket detection. The `src/calc_weq_lut.cpp` solver is the reference implementation.
 
 ## Rule 2: Full-miscibility lock-in for isotherms
 **Why**: Once P exceeds the CO2 saturation pressure at a given T, the physical system

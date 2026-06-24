@@ -6,23 +6,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -DNDEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
 
-# Header-only autodiff library (already in ./autodiff/)
+# Header-only autodiff library
 add_library(autodiff INTERFACE)
-target_include_directories(autodiff INTERFACE ${CMAKE_SOURCE_DIR})
+target_include_directories(autodiff INTERFACE ${CMAKE_SOURCE_DIR}/lib)
 target_compile_features(autodiff INTERFACE cxx_std_17)
 
 # SAFT-Mie static library
-add_library(saft_mie STATIC saft_mie.cpp saft_mie.h)
+add_library(saft_mie STATIC src/saft_mie.cpp src/saft_mie.h)
+target_include_directories(saft_mie PUBLIC ${CMAKE_SOURCE_DIR}/lib)
 target_link_libraries(saft_mie PUBLIC autodiff)
 
 # Step 1: Equilibrium solubility LUT
-add_executable(calc_weq_lut calc_weq_lut.cpp)
+add_executable(calc_weq_lut src/calc_weq_lut.cpp)
 target_link_libraries(calc_weq_lut PRIVATE saft_mie)
 
 # Step 2: Mesoscopic transport (tau_ms) LUT
-add_executable(calc_taums calc_taums.cpp)
+add_executable(calc_taums src/calc_taums.cpp)
 target_link_libraries(calc_taums PRIVATE saft_mie)
 
-# Original test executable (pure CO2 verification)
-add_executable(test_saft test.cpp)
+# Pure CO2 verification test
+add_executable(test_saft src/test.cpp)
 target_link_libraries(test_saft PRIVATE saft_mie)
